@@ -196,7 +196,7 @@
                             <!--/* when O/L result update state */-->
                             <tbody >
                             <tr data-th-each="studentResult, index : ${applicantDetail.applicantResults}"
-                                data-th-if="${#strings.equals(studentResult.streamLevel,'OL')} and ${studentResult.subjectResult != null}" >
+                                data-th-if="${#strings.equals(studentResult.streamLevel,'OL')} and ${studentResult.subjectResult != null} and ${studentResult.attempt != null}" >
                               <td data-th-text="${studentResult.subjectName}" >
                               </td >
                               <td data-th-text="${studentResult.subjectResult.subjectResult}" >
@@ -262,7 +262,8 @@
                         </tr >
                         </thead >
                         <tbody >
-                        <tr data-th-each="applicantDegreeResult, index : ${applicantDetail.applicantDegreeResults}" >
+                        <tr data-th-each="applicantDegreeResult, index : ${applicantDetail.applicantDegreeResults}"
+                            data-th-if="${applicantDegreeResult.degreeName !=null}" >
                           <td data-th-text="${applicantDegreeResult.degreeName}" ></td >
                           <td data-th-text="${applicantDegreeResult.universityName}" ></td >
                           <td data-th-text="${applicantDegreeResult.year}" ></td >

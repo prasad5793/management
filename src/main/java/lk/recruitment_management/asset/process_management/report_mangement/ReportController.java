@@ -2,13 +2,10 @@ package lk.recruitment_management.asset.process_management.report_mangement;
 
 import lk.recruitment_management.asset.applicant.entity.Applicant;
 import lk.recruitment_management.asset.applicant.service.ApplicantService;
-import lk.recruitment_management.asset.applicant_file.service.ApplicantFilesService;
 import lk.recruitment_management.asset.applicant_gazette.entity.ApplicantGazette;
 import lk.recruitment_management.asset.applicant_gazette.entity.enums.ApplicantGazetteStatus;
 import lk.recruitment_management.asset.applicant_gazette.entity.enums.ApplyingRank;
 import lk.recruitment_management.asset.applicant_gazette.service.ApplicantGazetteService;
-import lk.recruitment_management.asset.applicant_gazette_interview.service.ApplicantGazetteInterviewService;
-import lk.recruitment_management.asset.applicant_gazette_interview_result.service.ApplicantGazetteInterviewResultService;
 import lk.recruitment_management.asset.applicant_gazette_sis_crd_cid_result.entity.ApplicantGazetteSisCrdCid;
 import lk.recruitment_management.asset.applicant_gazette_sis_crd_cid_result.entity.enums.InternalDivision;
 import lk.recruitment_management.asset.applicant_gazette_sis_crd_cid_result.entity.enums.PassFailed;
@@ -16,10 +13,8 @@ import lk.recruitment_management.asset.applicant_gazette_sis_crd_cid_result.serv
 import lk.recruitment_management.asset.common_asset.model.TwoDate;
 import lk.recruitment_management.asset.gazette.entity.Gazette;
 import lk.recruitment_management.asset.gazette.service.GazetteService;
-import lk.recruitment_management.asset.interview.service.InterviewService;
 import lk.recruitment_management.asset.process_management.report_mangement.model.GazetteModel;
 import lk.recruitment_management.util.service.DateTimeAgeService;
-import lk.recruitment_management.util.service.FileHandelService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +22,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.ServletContext;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -38,35 +32,18 @@ import java.util.stream.Collectors;
 @RequestMapping( "/report" )
 public class ReportController {
   private final ApplicantService applicantService;
-  private final FileHandelService fileHandelService;
-  private final ServletContext context;
   private final ApplicantGazetteSisCrdCidService applicantGazetteSisCrdCidService;
-  private final InterviewService interviewService;
-  private final ApplicantGazetteInterviewService applicantGazetteInterviewService;
   private final GazetteService gazetteService;
   private final ApplicantGazetteService applicantGazetteService;
-  private final ApplicantFilesService applicantFilesService;
   private final DateTimeAgeService dateTimeAgeService;
-  private final ApplicantGazetteInterviewResultService applicantGazetteInterviewResultService;
 
-  public ReportController(ApplicantService applicantService, FileHandelService fileHandelService,
-                          ServletContext context, ApplicantGazetteSisCrdCidService applicantGazetteSisCrdCidService,
-                          InterviewService interviewService,
-                          ApplicantGazetteInterviewService applicantGazetteInterviewService,
-                          GazetteService gazetteService, ApplicantGazetteService applicantGazetteService,
-                          ApplicantFilesService applicantFilesService, DateTimeAgeService dateTimeAgeService,
-                          ApplicantGazetteInterviewResultService applicantGazetteInterviewResultService) {
+  public ReportController(ApplicantService applicantService,
+                          ApplicantGazetteSisCrdCidService applicantGazetteSisCrdCidService, GazetteService gazetteService, ApplicantGazetteService applicantGazetteService, DateTimeAgeService dateTimeAgeService) {
     this.applicantService = applicantService;
-    this.fileHandelService = fileHandelService;
-    this.context = context;
     this.applicantGazetteSisCrdCidService = applicantGazetteSisCrdCidService;
-    this.interviewService = interviewService;
-    this.applicantGazetteInterviewService = applicantGazetteInterviewService;
     this.gazetteService = gazetteService;
     this.applicantGazetteService = applicantGazetteService;
-    this.applicantFilesService = applicantFilesService;
     this.dateTimeAgeService = dateTimeAgeService;
-    this.applicantGazetteInterviewResultService = applicantGazetteInterviewResultService;
   }
 
   @GetMapping( "/gazette" )
