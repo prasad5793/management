@@ -8,7 +8,21 @@
     <div class="content-wrapper"><!-- content-wrapper Start -->
         <section th:replace="~{fragments/contentHeader :: contentHeaderSectionFragment}"></section>
 
-
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <h4>First sud Header</h4>-->
+                    <form role="form">
+                        <div align="right">
+                            <a class="btn btn-success" id="newDistrict" th:href="${'/interviewParameter'}">
+                                <i class="far fa-building" style="font-size: 18px;"></i> &nbsp;View Parameter </a>
+                            <a class="btn btn-info" id="newDistrict" th:href="${'/home'}">
+                                <i class="far fa-building" style="font-size: 18px;"></i> &nbsp; Back to Home </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <div class="content-header">
             <div class="container-fluid">

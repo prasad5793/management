@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="~{fragments/headerSection :: headerSectionFragment}" ></head >
+<body class="hold-transition sidebar-mini layout-fixed" >
+<div class="wrapper" ><!-- wrapper start -->
+  <nav th:replace="~{fragments/navbarSection :: navbarSectionFragment}" ></nav ><!-- navbar Section -->
+  <aside th:replace="~{fragments/sidebarSection :: sidebarSectionFragment}" ></aside ><!-- navbar Section -->
+  <div class="content-wrapper" ><!-- content-wrapper Start -->
+    <section th:replace="~{fragments/contentHeader :: contentHeaderSectionFragment}" ></section >
+                                <!-- Form Header  Path -->
+                                <!--        <section th:replace="~{fragments/smallBoxSection :: smallBoxSectionFragment}"></section>&lt;!&ndash; Small Box Set &ndash;&gt;-->
+
+
+    <div class="content-header" >
+      <div class="container-fluid" >
+        <div class="row" >
+          <div class="col-md-12" >
+            <div class="row" >
+              <div class="col-md-12" >
+                <div class="card" >
+                  <div class="card-body" >
+                    <!--                                        <h4>First sud Header</h4>-->
+                    <form role="form" >
+                      <div align="right" >
+                        <a class="btn btn-success" th:href="${'/applicant/add'}" >
+                          <i class="far fa-building" style="font-size: 18px;" ></i > &nbsp; Add Applicant </a >
+                        <a class="btn btn-info" th:href="${'/home'}" >
+                          <i class="far fa-building" style="font-size: 18px;" ></i > &nbsp; Back to Home </a >
+                      </div >
+                    </form >
+                  </div >
+                </div >
+              </div >
+            </div >
+          </div >
+          <div class="col-md-12" >
+            <div class="row" >
+              <div class="col-md-4" >
+                <div class="card" >
+                  <div class="card-body" >
+                    <div class="row" >
+                      <!--Custom Invoice search-->
+                      <button type="button" class="btn btn-info mb-5 btn-block text-capitalize" data-toggle="collapse"
+                              data-target="#dataTargetCollapse"
+                              aria-expanded="false" aria-controls="dataTargetCollapse"
+                      > Applicant Search
+                      </button >
+                      <div class="collapse mx-auto" id="dataTargetCollapse" >
+                        <div class="container-fluid text-center" >
+                          <div class="row" >
+                            <h4 class="text-info" ><b > Custom Search</b ></h4 >
+                            <div class="container" >
+                              <table class=" table" >
+                                <form class="form-inline" data-th-action="@{/report/gazette/search}"
+                                      data-th-method="POST" >
+
+                                  <tr >
+                                    <th >
+                                      <label for="startDate" >FROM :</label >
+                                    </th >
+                                    <td >
+                                      <input class="form-control" id="startDate" name="startDate" type="date" />
+                                    </td >
+                                  </tr >
+
+                                  <tr >
+                                    <th >
+                                      <label for="endDate" >TO :</label >
+                                    </th >
+                                    <td >
+                                      <input class="form-control" id="endDate" name="endDate" type="date" />
+                                    </td >
+                                  </tr >
+
+                                  <tr >
+                                    <th >
+                                      <label class="control-label" for="applyingRank" >Applying Rank
+                                                                                       :</label >
+                                    </th >
+                                    <td >
+                                      <select class="form-control" id="applyingRank"
+                                              required
+                                              data-th-name="${'applyingRank'}" >
+                                        <option value="" >Please select</option >
+                                        <option data-th-each="applyingRank : ${applyingRanks}"
+                                                data-th-text="${applyingRank.applyingRank}"
+                                                data-th-value="${applyingRank}" ></option >
+                                      </select >
+                                    </td >
+                                  </tr >
+
+                                  <tr >
+                                    <th >
+                                      <label class="control-label" for="applicantStatus" >Applicant Status
+                                                                                          :</label >
+                                    </th >
+                                    <td >
+                                      <select class="form-control" id="applicantStatus" required
+                                              data-th-name="${'applicantGazetteStatus'}" >
+                                        <option value="" >Please select</option >
+                                        <option data-th-each="applicantGazetteStatus : ${applicantGazetteStatuses}"
+                                                data-th-text="${applicantGazetteStatus.applicantGazetteStatus}"
+                                                data-th-value="${applicantGazetteStatus}" ></option >
+                                      </select >
+                                    </td >
+                                  </tr >
+
+                                  <tr >
+                                    <th >
+
+                                    </th >
+                                    <td >
+                                      <button class="btn btn-success" id="btnSummaryFind" type="submit" ><span
+                                            class="glyphicon glyphicon-search" ></span >&nbsp;Search
+                                      </button >
+                                      <button class="btn btn-warning" id="btnSummaryFind" type="reset" ><span
+                                            class="" ></span >&nbsp;Clear
+                                      </button >
+                                    </td >
+                                  </tr >
+                                </form >
+                              </table >
+
+                            </div >
+                          </div >
+                        </div >
+                      </div >
+                    </div >
+                  </div >
+                </div >
+              </div >
+              <div class="col-md-12" >
+                <div class="card" >
+                  <div class="card-body" data-th-each="gazetteModel, rowCount :${gazetteModels}" >
+                    <!--gazette detail-->
+                    <div class="row" >
+                      <div class="col" >
+                        <table class="table table-hover table-striped" id="myTable" >
+                          <thead >
+                          <tr >
+                            <th > Name</th >
+                            <th > Request Maximum Age</th >
+                            <th > Status</th >
+                            <th > Summary</th >
+                          </tr >
+                          </thead >
+                          <tbody >
+                          <tr >
+                            <th data-th-text="${gazetteModel.gazette.name}" ></th >
+                            <th data-th-text="${gazetteModel.gazette.age}" ></th >
+                            <th data-th-text="${gazetteModel.gazette.gazetteStatus.gazetteStatus}" ></th >
+                            <th data-th-utext="${gazetteModel.gazette.summary}" ></th >
+                          </tr >
+                          </tbody >
+                        </table >
+                      </div >
+                    </div >
+                    <!--button area-->
+                    <div class="row" >
+                      <!--applicantGazettes-->
+                      <button class="btn btn-primary m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#applicantGazettes'+rowCount.index}" aria-expanded="false" >
+                        Show Applied Gazette Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.applicantGazettes)}" ></span >)
+                      </button >
+                      <!--pendingList-->
+                      <button class="btn btn-secondary m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#pendingList'+rowCount.index}" aria-expanded="false" >
+                        Show Pending List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.pendingList)}" ></span >)
+                      </button >
+                      <!--approvedList-->
+                      <button class="btn btn-success m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#approvedList'+rowCount.index}" aria-expanded="false" >
+                        Show Approved List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.approvedList)}" ></span >)
+                      </button >
+                      <!--rejectList-->
+                      <button class="btn btn-info m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#rejectList'+rowCount.index}" aria-expanded="false" >
+                        Show Reject List Detail (<span data-th-text="${#lists.size(gazetteModel.rejectList)}" ></span >)
+                      </button >
+                      <!--firstInterviewList-->
+                      <button class="btn btn-warning m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#firstInterviewList'+rowCount.index}" aria-expanded="false" >
+                        Show First Interview List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.firstInterviewList)}" ></span >)
+                      </button >
+                      <!--firstInterviewPassList-->
+                      <button class="btn btn-dark m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#firstInterviewPassList'+rowCount.index}"
+                              aria-expanded="false" >
+                        Show First Interview Pass List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.firstInterviewPassList)}" ></span >)
+                      </button >
+                      <!--firstInterviewRejectList-->
+                      <button class="btn btn-light m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#firstInterviewRejectList'+rowCount.index}"
+                              aria-expanded="false" >
+                        Show First Interview Reject List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.firstInterviewRejectList)}" ></span >)
+                      </button >
+                      <!--secondInterviewList-->
+                      <button class="btn btn-outline-primary m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#secondInterviewList'+rowCount.index}"
+                              aria-expanded="false" >
+                        Show Second Interview List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.firstInterviewRejectList)}" ></span >)
+                      </button >
+                      <!--secondInterviewPassList-->
+                      <button class="btn btn-outline-secondary m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#secondInterviewPassList'+rowCount.index}"
+                              aria-expanded="false" >
+                        Show Second Interview Pass List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.secondInterviewPassList)}" ></span >)
+                      </button >
+                      <!--secondInterviewRejectList-->
+                      <button class="btn btn-outline-success m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#secondInterviewRejectList'+rowCount.index}"
+                              aria-expanded="false" >
+                        Show Second Interview Reject List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.secondInterviewRejectList)}" ></span >)
+                      </button >
+                      <!--thirdInterviewList-->
+                      <button class="btn btn-outline-info m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#thirdInterviewList'+rowCount.index}" aria-expanded="false" >
+                        Show Third Interview List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.thirdInterviewList)}" ></span >)
+                      </button >
+                      <!--thirdInterviewList-->
+                      <button class="btn btn-outline-warning m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#thirdInterviewPassList'+rowCount.index}"
+                              aria-expanded="false" >
+                        Show Third Interview Pass List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.thirdInterviewPassList)}" ></span >)
+                      </button >
+                      <!--thirdInterviewRejectList-->
+                      <button class="btn btn-outline-dark m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#thirdInterviewRejectList'+rowCount.index}"
+                              aria-expanded="false" >
+                        Show Third Interview Reject List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.thirdInterviewRejectList)}" ></span >)
+                      </button >
+                      <!--forthInterviewList-->
+                      <button class="btn btn-outline-light text-dark m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#forthInterviewList'+rowCount.index}" aria-expanded="false" >
+                        Show Forth Interview List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.forthInterviewList)}" ></span >)
+                      </button >
+                      <!--forthInterviewPassList-->
+                      <button class="btn btn-secondary m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#forthInterviewRejectList'+rowCount.index}"
+                              aria-expanded="false" >
+                        Show Forth Interview Reject List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.forthInterviewRejectList)}" ></span >)
+                      </button >
+                      <!--stateIntelligenceSPassList-->
+                      <button class="btn btn-light m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#stateIntelligenceSPassList'+rowCount.index}"
+                              aria-expanded="false" >
+                        Show State Intelligence Past List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.stateIntelligenceSPassList)}" ></span >)
+                      </button >
+                      <!--stateIntelligenceFailList-->
+                      <button class="btn btn-warning m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#stateIntelligenceFailList'+rowCount.index}"
+                              aria-expanded="false" >
+                        Show State Intelligence Fail List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.stateIntelligenceFailList)}" ></span >)
+                      </button >
+                      <!--crimeRecordDPassList-->
+                      <button class="btn btn-primary m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#crimeRecordDPassList'+rowCount.index}"
+                              aria-expanded="false" >
+                        Show Crime Record D Pass List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.crimeRecordDPassList)}" ></span >)
+                      </button >
+                      <!--crimeRecordDFailList-->
+                      <button class="btn btn-outline-info m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#crimeRecordDFailList'+rowCount.index}"
+                              aria-expanded="false" >
+                        Show Crime Record D Fail List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.crimeRecordDFailList)}" ></span >)
+                      </button >
+                      <!--criminalInvestigationDPassList-->
+                      <button class="btn btn-outline-secondary m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#criminalInvestigationDPassList'+rowCount.index}"
+                              aria-expanded="false" >
+                        Show Criminal Investigation D Pass List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.criminalInvestigationDPassList)}" ></span >)
+                      </button >
+                      <!--criminalInvestigationDFailList-->
+                      <button class="btn btn-outline-warning m-1" type="button" data-toggle="collapse"
+                              data-th-attr="data-target=${'#criminalInvestigationDFailList'+rowCount.index}"
+                              aria-expanded="false" >
+                        Show Criminal Investigation D Fail List Detail (<span
+                            data-th-text="${#lists.size(gazetteModel.criminalInvestigationDFailList)}" ></span >)
+                      </button >
+
+                    </div >
+                    <!--data show area-->
+                    <div class="row" >
+                      <!--applicantGazettes-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'applicantGazettes'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.applicantGazettes}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--pendingList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'pendingList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.pendingList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--approvedList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'approvedList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.approvedList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--rejectList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'rejectList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.rejectList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--firstInterviewList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'firstInterviewList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.firstInterviewList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--firstInterviewList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'firstInterviewPassList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.firstInterviewPassList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--firstInterviewRejectList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'firstInterviewRejectList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.firstInterviewRejectList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--secondInterviewList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'secondInterviewList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.secondInterviewList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--secondInterviewPassList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'secondInterviewPassList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.secondInterviewPassList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--secondInterviewRejectList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'secondInterviewRejectList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.secondInterviewRejectList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--thirdInterviewList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'thirdInterviewList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.thirdInterviewList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--thirdInterviewPassList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'thirdInterviewPassList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.thirdInterviewPassList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--thirdInterviewRejectList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'thirdInterviewRejectList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.thirdInterviewRejectList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--forthInterviewList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'forthInterviewList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.forthInterviewList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--forthInterviewPassList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'forthInterviewPassList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.forthInterviewPassList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--forthInterviewRejectList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'forthInterviewRejectList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.forthInterviewRejectList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--stateIntelligenceSPassList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'stateIntelligenceSPassList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.stateIntelligenceSPassList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--stateIntelligenceFailList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'stateIntelligenceFailList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.stateIntelligenceFailList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--crimeRecordDPassList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'crimeRecordDPassList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.crimeRecordDPassList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--crimeRecordDFailList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'crimeRecordDFailList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.crimeRecordDFailList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--criminalInvestigationDPassList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'criminalInvestigationDPassList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.criminalInvestigationDPassList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                      <!--criminalInvestigationDFailList-->
+                      <div class="col" >
+                        <div class="collapse" data-th-id="${'criminalInvestigationDFailList'+rowCount.index}" >
+                          <table class="table table-striped table-inverse" >
+                            <thead class="thead-inverse" >
+                            <tr >
+                              <th >Index</th >
+                              <th >Applicant Name</th >
+                              <th >Gazette Name</th >
+                              <th >Summary Of Gazette</th >
+                              <th >Applied Rank</th >
+                              <th >Current Status</th >
+                            </tr >
+                            </thead >
+                            <tbody >
+                            <tr data-th-each="applicantGazette, index : ${gazetteModel.criminalInvestigationDFailList}" >
+                              <td data-th-text="${index.count}" ></td >
+                              <td data-th-text="${applicantGazette.applicant.nameWithInitial}" ></td >
+                              <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                              <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                              <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                              <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                            </tr >
+                            </tbody >
+                          </table >
+                        </div >
+                      </div >
+                    </div >
+                  </div >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
+
+  </div ><!-- content-wrapper end -->
+  <div th:replace="~{fragments/footerSection :: footerSectionFragment}" ></div ><!-- footer Section -->
+</div ><!-- wrapper end -->
+<div th:replace="~{fragments/scriptSection :: scriptSectionFragment}" ></div ><!-- script Fragment -->
+</body >
+</html >

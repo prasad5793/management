@@ -10,6 +10,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -56,4 +57,8 @@ public class GazetteService implements AbstractService< Gazette, Integer> {
   public List< Gazette > findByGazetteStatus(GazetteStatus gazetteStatus) {
   return gazetteDao.findByGazetteStatus(gazetteStatus);
     }
+
+  public List< Gazette> findByCreatedAtIsBetween(LocalDateTime startAt, LocalDateTime endAt) {
+        return gazetteDao.findByCreatedAtIsBetween(startAt,endAt);
+  }
 }

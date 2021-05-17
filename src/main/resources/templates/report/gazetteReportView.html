@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="~{fragments/headerSection :: headerSectionFragment}" ></head >
+<body class="hold-transition sidebar-mini layout-fixed" >
+<div class="wrapper" ><!-- wrapper start -->
+  <nav th:replace="~{fragments/navbarSection :: navbarSectionFragment}" ></nav ><!-- navbar Section -->
+  <aside th:replace="~{fragments/sidebarSection :: sidebarSectionFragment}" ></aside ><!-- navbar Section -->
+  <div class="content-wrapper" ><!-- content-wrapper Start -->
+    <section th:replace="~{fragments/contentHeader :: contentHeaderSectionFragment}" ></section >
+                                <!-- Form Header  Path -->
+                                <!--        <section th:replace="~{fragments/smallBoxSection :: smallBoxSectionFragment}"></section>&lt;!&ndash; Small Box Set &ndash;&gt;-->
+
+
+    <div class="content-header" >
+      <div class="container-fluid" >
+        <div class="row" >
+          <div class="col-md-12" >
+            <div class="row" >
+              <div class="col-md-12" >
+                <div class="card" >
+                  <div class="card-body" >
+                    <!--                                        <h4>First sud Header</h4>-->
+                    <form role="form" >
+                      <div align="right" >
+                        <a class="btn btn-success" th:href="${'/applicant/add'}" >
+                          <i class="far fa-building" style="font-size: 18px;" ></i > &nbsp; Add Applicant </a >
+                        <a class="btn btn-info" th:href="${'/home'}" >
+                          <i class="far fa-building" style="font-size: 18px;" ></i > &nbsp; Back to Home </a >
+                      </div >
+                    </form >
+                  </div >
+                </div >
+              </div >
+            </div >
+          </div >
+          <div class="col-md-12" >
+            <div class="row" >
+              <div class="col-md-4" >
+                <div class="card" >
+                  <div class="card-body" >
+                    <div class="row" >
+                      <!--Custom Invoice search-->
+                      <button type="button" class="btn btn-info mb-5 btn-block text-capitalize" data-toggle="collapse"
+                              data-target="#dataTargetCollapse"
+                              aria-expanded="false" aria-controls="dataTargetCollapse"
+                      > Applicant Search
+                      </button >
+                      <div class="collapse mx-auto" id="dataTargetCollapse" >
+                        <div class="container-fluid text-center" >
+                          <div class="row" >
+                            <h4 class="text-info" ><b > Custom Search</b ></h4 >
+                            <div class="container" >
+                              <table class=" table" >
+                                <form class="form-inline" data-th-action="@{/report/applicant/search}"
+                                      data-th-method="POST" >
+
+                                  <tr >
+                                    <th >
+                                      <label for="startDate" >FROM :</label >
+                                    </th >
+                                    <td >
+                                      <input class="form-control" id="startDate" name="startDate" type="date" />
+                                    </td >
+                                  </tr >
+
+                                  <tr >
+                                    <th >
+                                      <label for="endDate" >TO :</label >
+                                    </th >
+                                    <td >
+                                      <input class="form-control" id="endDate" name="endDate" type="date" />
+                                    </td >
+                                  </tr >
+
+                                  <tr >
+                                    <th >
+                                      <label class="control-label" for="applyingRank" >Applying Rank
+                                                                                       :</label >
+                                    </th >
+                                    <td >
+                                      <select class="form-control" id="applyingRank"
+                                              required
+                                              data-th-name="${'applyingRank'}" >
+                                        <option value="" >Please select</option >
+                                        <option data-th-each="applyingRank : ${applyingRanks}"
+                                                data-th-text="${applyingRank.applyingRank}"
+                                                data-th-value="${applyingRank}" ></option >
+                                      </select >
+                                    </td >
+                                  </tr >
+
+                                  <tr >
+                                    <th >
+                                      <label class="control-label" for="applicantStatus" >Applicant Status
+                                                                                          :</label >
+                                    </th >
+                                    <td >
+                                      <select class="form-control" id="applicantStatus" required
+                                              data-th-name="${'applicantGazetteStatus'}" >
+                                        <option value="" >Please select</option >
+                                        <option data-th-each="applicantGazetteStatus : ${applicantGazetteStatuses}"
+                                                data-th-text="${applicantGazetteStatus.applicantGazetteStatus}"
+                                                data-th-value="${applicantGazetteStatus}" ></option >
+                                      </select >
+                                    </td >
+                                  </tr >
+
+                                  <tr >
+                                    <th >
+
+                                    </th >
+                                    <td >
+                                      <button class="btn btn-success" id="btnSummaryFind" type="submit" ><span
+                                            class="glyphicon glyphicon-search" ></span >&nbsp;Search
+                                      </button >
+                                      <button class="btn btn-warning" id="btnSummaryFind" type="reset" ><span
+                                            class="" ></span >&nbsp;Clear
+                                      </button >
+                                    </td >
+                                  </tr >
+                                </form >
+                              </table >
+
+                            </div >
+                          </div >
+                        </div >
+                      </div >
+                    </div >
+                  </div >
+                </div >
+              </div >
+              <div class="col-8">
+                <p >
+                  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#contentId"
+                          aria-expanded="false"
+                          aria-controls="contentId" >
+                    Show Gazette Detail
+                  </button >
+                </p >
+                <div class="collapse" id="contentId" >
+                  <div class="col" data-th-if="${not #lists.isEmpty(gazettes)}">
+                    <table class="table table-hover table-striped" id="myTable">
+                      <thead>
+                      <tr>
+                        <th> Index</th>
+                        <th> Name </th>
+                        <th> Request Maximum Age</th>
+                        <th> Status </th>
+                        <th> Summary </th>
+                        <th> Modify</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr data-th-each="gazette, rowCount : ${gazettes}">
+                        <th data-th-text="${rowCount.count}"></th>
+                        <th data-th-text="${gazette.name}"></th>
+                        <th data-th-text="${gazette.age}"></th>
+                        <th data-th-text="${gazette.gazetteStatus.gazetteStatus}"></th>
+                        <th data-th-utext="${gazette.summary}"></th>
+                        <th>
+                          <a data-th-href="${'/report/gazette/' + gazette.id}"
+                             class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;View Status Report</a>
+                        </th>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div >
+              </div>
+              <div class="col-md-8" >
+                <p >
+                  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#contentId1"
+                          aria-expanded="false"
+                          aria-controls="contentId1" >
+                    Show Applicant Detail
+                  </button >
+                </p >
+                <div class="collapse" id="contentId1" >
+                <div data-th-if="${not #lists.isEmpty(applicants)}" class="card" >
+                  <div class="card-body" >
+                    <h4 >Applicant Details</h4 >
+                    <div class="card-body" >
+                      <table class="table  table-hover "   >
+                        <thead >
+                        <tr >
+                          <th > Index</th >
+                          <th > Name</th >
+                          <th > Police Station</th >
+                          <th > Applied Gazette
+                                                                                                        Detail
+                          </th >
+                        </tr >
+                        </thead >
+                        <tbody >
+                        <tr th:each="applicant, rowCount : ${applicants}" >
+                          <td th:text="${rowCount.count}" ></td >
+                          <td th:text="${applicant.nameWithInitial}" ></td >
+                          <td th:text="${applicant.gramaNiladhari.policeStation.name}" ></td >
+                          <td >
+                            <p >
+                              <button class="btn btn-primary" type="button" data-toggle="collapse"
+                                      data-th-attr="data-target=${'#contentId'+rowCount.index}" aria-expanded="false" >
+                                Show Applied Gazette Detail
+                              </button >
+                            </p >
+                            <div class="collapse" data-th-id="${'contentId'+rowCount.index}" >
+                              <table class="table table-striped table-inverse" >
+                                <thead class="thead-inverse" >
+                                <tr >
+                                  <th >Index</th >
+                                  <th >Gazette Name</th >
+                                  <th >Summary Of Gazette</th >
+                                  <th >Applied Rank</th >
+                                  <th >Current Status</th >
+                                  <th >
+                                    <span > Action</span >
+                                  </th >
+                                </tr >
+                                </thead >
+                                <tbody >
+                                <tr data-th-each="applicantGazette, index : ${applicant.applicantGazettes}" >
+                                  <td data-th-text="${index.count}" ></td >
+                                  <td data-th-text="${applicantGazette.gazette.name}" ></td >
+                                  <td data-th-value="${applicantGazette.gazette.summary}" ></td >
+                                  <td data-th-text="${applicantGazette.applyingRank.applyingRank}" ></td >
+                                  <td data-th-text="${applicantGazette.applicantGazetteStatus.applicantGazetteStatus}" ></td >
+                                  <td data-sec-authorize="not hasRole('ROLE_APPLICANT')" >
+                                    <div class="row" >
+                                      <a
+                                         data-th-href="${'/applicantGazette/approve/' + applicantGazette.id}"
+                                         class="btn btn-success btn-sm" ><i
+                                            class="fa fa-edit" ></i >&nbsp;Approved</a >
+                                      <a
+                                         data-th-href="${'/applicantGazette/reject/' + applicantGazette.id}"
+                                         class="btn btn-danger btn-sm ml-1" ><i
+                                            class="fa fa-edit" ></i >&nbsp;Reject</a >
+                                    </div >
+                                  </td >
+                                </tr >
+                                </tbody >
+                              </table >
+                            </div >
+                          </td >
+                        </tr >
+                        </tbody >
+                      </table >
+                    </div >
+                    <div class="row" th:if="${ #lists.isEmpty(applicants)}" >
+                      <!-- <div class="col-sm-12">-->
+                      <div class="alert alert-warning alert-dismissible fade show" role="alert" >
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+                          <span aria-hidden="true" >&times;</span >
+                        </button >
+                        <h3 class="text-center text-danger" >
+                          <strong >There is no applicant upto now please add applicant to the system
+                                   using add applicant button.
+                          </strong >
+                        </h3 >
+                      </div >
+                    </div >
+                  </div >
+                </div   >
+                </div>
+              </div >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
+
+  </div ><!-- content-wrapper end -->
+  <div th:replace="~{fragments/footerSection :: footerSectionFragment}" ></div ><!-- footer Section -->
+</div ><!-- wrapper end -->
+<div th:replace="~{fragments/scriptSection :: scriptSectionFragment}" ></div ><!-- script Fragment -->
+</body >
+</html >

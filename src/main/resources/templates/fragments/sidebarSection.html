@@ -9,7 +9,7 @@
     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     <a href="index.html" class="brand-link">
 
-        <img src="/img/airporticon.png" alt="AVSEC WMS Logo" class="brand-image img-circle elevation-3"
+        <img src="/img/police.png" alt="AVSEC WMS Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <span class="brand-text font-weight-light">Recruitment Div.</span>
     </a>
@@ -25,7 +25,7 @@
                 <img src="" class="img-circle elevation-2" alt="User Image">
             </div>-->
             <div class="info">
-                <a href="#" class="d-block">Sajith</a>
+               <h6></h6> <a><span data-th-text="${#authentication.name}"></span></a></h6>
             </div>
         </div>
 
@@ -45,7 +45,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="./index3.html" class="nav-link">
+                            <a href="./logout.html" class="nav-link">
                                 <i class="fas fa-key"></i>
                                 <p>Password Change</p>
                             </a>
@@ -61,64 +61,8 @@
                         </p>
                     </a>
                 </li> <!--Dashboad-->
-
-                <li class="nav-item has-treeview">
-                    <a href="/employee" class="nav-link">
-
-                        <i class="fas fa-users"></i>
-                        <p>
-                            Applicant Mgt
-                            <i class="fas fa-angle-left right"></i>
-                            <span class="badge badge-info right"></span>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/employee/add" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Member Registration</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/employee" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Members View</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/employee" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Member Delete</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/designation" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Designation</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/workingPlace" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Group Mgt</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/dependency" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dependants</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/qualification" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Qualification</p>
-                            </a>
-                        </li>
-                    </ul>
-                <li class="nav-item has-treeview">
-                    <a href="/employee" class="nav-link">
-
+                <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}">
+                    <a href="#" class="nav-link">
                         <i class="fas fa-users"></i>
                         <p>
                             Interview Mgt
@@ -127,335 +71,197 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/employee/add" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Member Registration</p>
-                            </a>
+
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/interviewSchedule/add" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add Interview Schedule</p>
+                        </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/employee" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Members View</p>
-                            </a>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/interview" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View Interview</p>
+                        </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/employee" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Member Delete</p>
-                            </a>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/interview/add" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add Interview</p>
+                        </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/designation" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Designation</p>
-                            </a>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/interviewBoard" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View Interview Board</p>
+                        </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/workingPlace" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Group Mgt</p>
-                            </a>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/applicant" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View Applicant</p>
+                        </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/dependency" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dependants</p>
-                            </a>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/interviewBoard/add" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add Interview Board</p>
+                        </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/qualification" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Qualification</p>
-                            </a>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/interviewManage/manage" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View Interview Manage</p>
+                        </a>
+                        </li>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/interviewParameter" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View Interview Parameter</p>
+                        </a>
+                        </li>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/interviewParameter/add" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add Interview Parameter</p>
+                        </a>
+                        </li>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/gazette" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View Gazette</p>
+                        </a>
                         </li>
                     </ul>
-                </li><!--Members Mgt-->
-                <li class="nav-item has-treeview">
-                    <a href="/police" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                            Interview Schedule Mgt
-                            <i class="fas fa-angle-left right"></i>
 
+
+                <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-users"></i>
+                                <p>
+                                    General Mgt
+                                    <i class="fas fa-angle-left right"></i>
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/district" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View District</p>
+                        </a>
+                        </li>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/agOffice" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View AG Office</p>
+                        </a>
+                        </li>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/policeStation" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View Police Station</p>
+                        </a>
+                        </li>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/gramaNiladhari" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View Grama Niladhari</p>
+                        </a>
+                        </li>
+                            </ul>
+
+
+                <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <p>
+                            Employee Mgt
+                            <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right"></span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/interviewSchedule" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Interview Scheule</p>
-                            </a>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/employee" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View Employee</p>
+                        </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/addPaymentType" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Payment Type</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/financialYears" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Financial Year</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/paymentsSection" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Payments Section</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/paymentView" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Payment View</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/receivingExpenses" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Receiving Expenses</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/setPayment" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Set Payment</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/feeType" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Test Case</p>
-                            </a>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/employee/add" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add Employee</p>
+                        </a>
                         </li>
                     </ul>
+
                 </li>
 
-                <li class="nav-item has-treeview">
+                <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'',''ROLE_APPLICANT'')')}">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="fas fa-users"></i>
                         <p>
-                            District Mgt
-                            <i class="right fas fa-angle-left"></i>
+                            Applicant Mgt
+                            <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right"></span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/district/add" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>District Add</p>
-                            </a>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'',''ROLE_APPLICANT'')')}"><a href="/home" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>My Account</p>
+                        </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/district" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>District View</p>
-                            </a>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'',''ROLE_APPLICANT'')')}"><a href="/profile/edit" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Profile</p>
+                        </a>
                         </li>
-<!--                        <li class="nav-item">-->
-<!--                            <a href="#" class="nav-link">-->
-<!--                                <i class="far fa-circle nav-icon"></i>-->
-<!--                                <p>Meetings</p>-->
-<!--                            </a>-->
-<!--                        </li>-->
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'',''ROLE_APPLICANT'')')}"><a href="/passwordChange" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Change Password</p>
+                        </a>
+                        </li>
                     </ul>
 
-                <!--Account Mgt-->
-                <li class="nav-item has-treeview">
+                </li>
+
+                <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="fas fa-users"></i>
                         <p>
-                            Divisional Sec. Mgt
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/agOffice/add" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Divisional Sec.Add</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/agOffice" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Divisional Sec. View</p>
-                            </a>
-                        </li>
-<!--                        <li class="nav-item">-->
-<!--                            <a href="#" class="nav-link">-->
-<!--                                <i class="far fa-circle nav-icon"></i>-->
-<!--                                <p>Meetings</p>-->
-<!--                            </a>-->
-<!--                        </li>-->
-                    </ul>
-                </li><!--Notice mgt-->
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
-                        <p>
-                            Police Station Mgt
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/policeStation/add" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Police Station Add</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/policeStation" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Police Station View</p>
-                            </a>
-                        </li>
-<!--                        <li class="nav-item">-->
-<!--                            <a href="#" class="nav-link">-->
-<!--                                <i class="far fa-circle nav-icon"></i>-->
-<!--                                <p>Edit User</p>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                            <a href="#" class="nav-link">-->
-<!--                                <i class="far fa-circle nav-icon"></i>-->
-<!--                                <p>Remove User</p>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                            <a href="#" class="nav-link">-->
-<!--                                <i class="far fa-circle nav-icon"></i>-->
-<!--                                <p>Privilege Mgt</p>-->
-<!--                            </a>-->
-<!--                        </li>-->
-                    </ul>
-                </li><!--System Mgt-->
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tree"></i>
-                        <p>
-                            GramaNiladhari Mgt
+                            System Mgt
                             <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right"></span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/gramaNiladhari/add" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Grama Niladhari Add</p>
-                            </a>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/user" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View User</p>
+                        </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/gramaNiladhari" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Grama Niladhari View</p>
-                            </a>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/role" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View Role</p>
+                        </a>
                         </li>
-<!--                        <li class="nav-item">-->
-<!--                            <a href="#" class="nav-link">-->
-<!--                                <i class="far fa-circle nav-icon"></i>-->
-<!--                                <p>Edit Email</p>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                            <a href="#" class="nav-link">-->
-<!--                                <i class="far fa-circle nav-icon"></i>-->
-<!--                                <p>Send SMS</p>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                            <a href="#" class="nav-link">-->
-<!--                                <i class="far fa-circle nav-icon"></i>-->
-<!--                                <p>Edit SMS</p>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="nav-item">-->
-<!--                            <a href="#" class="nav-link">-->
-<!--                                <i class="far fa-circle nav-icon"></i>-->
-<!--                                <p>View SMS</p>-->
-<!--                            </a>-->
-<!--                        </li>-->
-                    </ul>
-                </li><!--Contact Mgt-->
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-edit"></i>
-                        <p>
-                            Notification Mgt
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Grievances</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Task Management</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Org. Structure</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>E-Application</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Trainings Materials</p>
-                            </a>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/passwordChange" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Change Password</p>
+                        </a>
                         </li>
                     </ul>
-                </li><!--Welfare Mgt-->
-                <li class="nav-item has-treeview">
+
+                </li>
+
+                <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-table"></i>
+                        <i class="fas fa-users"></i>
                         <p>
                             Report Mgt
                             <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right"></span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Employee List</p>
-                            </a>
+                        <li class="nav-item has-treeview" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_DIRECTOR'', ''ROLE_OIC'',''ROLE_CLERK'')')}"><a href="/report/gazette" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>All Reports</p>
+                        </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Account Reports</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Noties</p>
-                            </a>
-                        </li>
+
                     </ul>
-                </li><!--Report Mgt-->
 
-
+                </li>
             </ul>
         </nav>
-        <!-- /.sidebar-menu -->
-
-
     </div>
     <!-- /.sidebar -->
 </aside>

@@ -5,7 +5,7 @@
 <div class="wrapper"><!-- wrapper start -->
     <nav th:replace="~{fragments/navbarSection :: navbarSectionFragment}"></nav><!-- navbar Section -->
     <aside th:replace="~{fragments/sidebarSection :: sidebarSectionFragment}"></aside><!-- navbar Section -->
-    <div class="content-wrapper" style="background-size:70% auto; background-image:url('./img/mainbg.jpg');"><!-- content-wrapper Start -->
+    <div class="content-wrapper" style="background-size:70% auto; background-image:url('./img/6.jpg'); background-size: cover"><!-- content-wrapper Start -->
 
         <div class="content-header mt-5">
             <div class="container-fluid" >
@@ -69,6 +69,20 @@
                                             <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/interviewManage/manage" style="color: #ffffff;" >interviewManage/manage</a></li>
                                             <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/interviewParameter" style="color: #ffffff;" >interviewParameter</a></li>
                                             <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/interviewParameter/add" style="color: #ffffff;" >interviewParameter/add</a></li>
+                                            <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/agOffice" style="color: #ffffff;" >AG Office Details</a></li>
+                                            <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/agOffice/add" style="color: #ffffff;" >Add AG Office</a></li>
+                                            <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/district" style="color: #ffffff;" >district</a></li>
+                                            <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/employee/add" style="color: #ffffff;" >employee/add</a></li>
+                                            <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/employee/search" style="color: #ffffff;" >employee/search</a></li>
+                                            <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/employee" style="color: #ffffff;" >employee</a></li>
+                                            <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/interview" style="color: #ffffff;" >interview</a></li>
+                                            <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/interview/add" style="color: #ffffff;" >interview/add</a></li>
+                                            <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/interviewBoard" style="color: #ffffff;" >interviewBoard</a></li>
+                                            <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/interviewBoard/add" style="color: #ffffff;" >interviewBoard/add</a></li>
+                                            <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/interviewManage/manage" style="color: #ffffff;" >interviewManage/manage</a></li>
+                                            <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/interviewParameter" style="color: #ffffff;" >interviewParameter</a></li>
+                                            <li style="font-size: x-large" class="nav-item" data-th-if="${#authorization.expression('hasAnyRole(''ROLE_ADMIN'',''ROLE_HOSS'')')}"><a href="/interviewParameter/add" style="color: #ffffff;" >interviewParameter/add</a></li>
+
 
 
                                         </ul></small>
